@@ -17,7 +17,7 @@ local function reduceRocketDamage( ent, dmginfo )
     local newForce = dmgForce * forceMult:GetFloat()
     dmginfo:SetDamageForce( newForce )
 
-    if ent:KeyDown( IN_DUCK	) then
+    if ent:KeyDown( IN_DUCK ) then
         ent:SetVelocity( newForce / 35 )
     else
         ent:SetVelocity( newForce / 70 )
