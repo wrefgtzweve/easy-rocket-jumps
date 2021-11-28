@@ -1,7 +1,7 @@
 -- Convars
 local enabled = CreateConVar( "rocketjumps_enabled", 1, { FCVAR_ARCHIVE }, "Enables rocket jumping (1/0).", 0 ):GetBool()
 cvars.AddChangeCallback( "rocketjumps_enabled", function( _, _, val )
-    enabled = tonumber( val )
+    enabled = tobool( val )
 end)
 
 local scaleDamage = CreateConVar( "rocketjumps_dmgmult", 0.4, { FCVAR_ARCHIVE }, "The damage multiplier for self damaging explosions.", 0 ):GetFloat()
@@ -16,7 +16,7 @@ end)
 
 local allExplosions = CreateConVar( "rocketjumps_allexplosions", 0, { FCVAR_ARCHIVE }, "Should the force multiplier be applied to all explosions instead of only self inflicted ones?.", 0 ):GetBool()
 cvars.AddChangeCallback( "rocketjumps_allexplosions", function( _, _, val )
-    allExplosions = tonumber( val )
+    allExplosions = tobool( val )
 end)
 
 local function reduceRocketDamage( ent, dmginfo )
