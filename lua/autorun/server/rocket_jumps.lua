@@ -19,6 +19,11 @@ cvars.AddChangeCallback( "rocketjumps_allexplosions", function( _, _, val )
     allExplosions = tobool( val )
 end)
 
+local disableTinnitus = CreateConVar( "rocketjumps_disable_earringing", 1, { FCVAR_ARCHIVE }, "Should the ear ringing tinnitus effect be disabled?.", 0 ):GetBool()
+cvars.AddChangeCallback( "rocketjumps_disable_earringing", function( _, _, val )
+    disableTinnitus = tobool( val )
+end)
+
 local function reduceRocketDamage( ent, dmginfo )
     if not enabled then return end
     if not dmginfo:IsExplosionDamage() then return end
@@ -42,3 +47,10 @@ local function reduceRocketDamage( ent, dmginfo )
 end
 
 hook.Add( "EntityTakeDamage", "rocketjumpsEntityTakeDamage", reduceRocketDamage )
+
+-- Remove tinnitus
+
+hook.Add( "OnDamagedByExplosion", "DisableSound", function()
+    if not disableTinnitus then return end
+    return true
+end)
